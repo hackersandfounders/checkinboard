@@ -29,6 +29,8 @@ angular.module('board', [
   .controller('BoardController', function($scope, Data, $timeout, $modal) {
 
     $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2'];
+    $scope.allRooms.reverse();
+    
     $scope.running = true;
     function reload() {
       Data.getBoardState().then(function(state) {
