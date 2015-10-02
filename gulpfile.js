@@ -105,7 +105,6 @@ gulp.task('usemin', ['styles'], function () {
 // Pipeline - copying files, browserify
 // ----------------------------------------
 gulp.task('pipeline', function () {
-
   return gulp.src(['./app/fonts/**', './app/img/**', './app/sounds/**'],
                   {base: './app'})
     .pipe(gulp.dest('dist'));

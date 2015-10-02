@@ -1,5 +1,5 @@
 $pad: 10px;
-$mainbg: #599C88;
+$mainbg: #444444;
 $lightgray: #f0f0f0;
 $mediumgray: #777;
 
@@ -12,23 +12,32 @@ $fontMedium: 24px;
 $fontLarge: 46px;
 
 body {
+    font-family: "Neue Helvetica W01", Helvetica, Arial, sans-serif;
     padding: $tilepad;
     background: $mainbg;
     font-weight: 400;
+}
+
+div.logo img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 50px;
 }
 
 div.tile {
     background: white;
     padding: $pad;
     margin-bottom: $tilepad;
+    
     box-shadow: 6px 6px 6px rgba(0,0,0,0.1);
     
     >.header {
         font-size: $fontMedium;
-        font-weight: 500;
+        font-weight: 400;
         color: $mediumgray;
     }
     >.body {
+        font-weight: bold;
         margin-top: $pad;
         padding-top: $pad;
         border-top: 2px solid $lightgray;
@@ -39,7 +48,7 @@ div.tile {
 div.tile.people-status {
     .row.inout {
         font-size: 40px;
-        span { font-weight: 500; }
+        span { font-weight: bold; }
         .out { color: $red; }
         .in { color: $green; };
     }
@@ -58,14 +67,15 @@ div.tile.room-status {
             margin: 2px;
         }
         span.status {
+            margin-top: 5px;
             position: absolute;
             width: 100%;
             display: block;
             text-align: center;
-            font-weight: 500;
+            font-weight: bold;
             font-size: $fontMedium;
-            top: 50%;
-            transform: translateY(-50%);
+            //top: 50%;
+            //transform: translateY(-50%);
         }
         &.inhabited {
             background: $green;
@@ -75,7 +85,7 @@ div.tile.room-status {
 
 div.person-status {
     font-size: $fontMedium;
-    font-weight: 500;
+    font-weight: bold;
     i {
         padding-right: $pad/2;
     }
@@ -90,7 +100,7 @@ div.person-status {
 
 div.tag-popup {
     .modal-header {
-        font-weight: 500;
+        font-weight: bold;
         font-size: $fontMedium;
         .meta {
             font-size: $fontNormal;
@@ -110,6 +120,7 @@ div.tag-popup {
     }
     
     h1 {
+        font-weight: bold;
         text-align: center;
         margin-top: $pad*4;
         margin-bottom: $pad*4;

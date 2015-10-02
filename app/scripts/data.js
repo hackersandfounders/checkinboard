@@ -29,7 +29,7 @@ angular.module('board.data', [])
             var ts = moment(tag.updated_at);
             var delta = moment().diff(ts, 'seconds');
 
-            if (delta > 3600*12) {
+            if (delta > 3600*12 && delta < 3600*24*7) {
               unsureFlag = true;
             }
             var checkinState = tag.status == 'present' ? 'in' : 'out';
@@ -61,7 +61,7 @@ angular.module('board.data', [])
       
       var recent = _(states).reject('unsure').slice(0,12).value();
       var unsure = _(states).filter('unsure').map('person').slice(0,8).value();
-      
+
       return {
         people: {
           'in': _.filter(states, {state: 'in'}).length,
