@@ -5,7 +5,7 @@
     
     <div class="body">
 
-        <div class="person-status" ng-repeat="p in state.recent">
+        <div class="person-status {{ p.state }}" ng-repeat="p in state.recent">
             <i class="glyphicon glyphicon-log-{{ p.state }}"></i>
             {{ p.person.name }}
             <span class="time">{{ p.time }}</span>

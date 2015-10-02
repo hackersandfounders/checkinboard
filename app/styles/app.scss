@@ -86,6 +86,11 @@ div.tile.room-status {
 div.person-status {
     font-size: $fontMedium;
     font-weight: bold;
+
+    &.out {
+        color: #999;
+    }
+    
     i {
         padding-right: $pad/2;
     }
