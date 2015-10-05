@@ -7,9 +7,11 @@ angular.module('board.data', [])
 
   .factory('Data', function($http, Config) {
 
+    var lastPresence;
     function getPresenceList() {
       return $http.get(Config.baseUrl + 'presence').then(function(r) {
-        return r.data.people;
+        lastPresence = r.data.people;
+        return lastPresence;
       });
     }
 
@@ -50,9 +52,11 @@ angular.module('board.data', [])
       var rooms = _(states)
         .groupBy('room')
         .mapValues(function(v) {
-          var inCount = _(v).filter({state:'in'}).value().length;
+          var people = _(v).filter({state:'in'}).value();
+          var inCount = people.length;
           return {
             total: v.length,
+            people: people,
             'in': inCount,
             state: inCount > 0 ? 'inhabited' : 'deserted'
           };
@@ -89,6 +93,10 @@ angular.module('board.data', [])
         return $http.patch(Config.baseUrl + 'tags/' + tag, {status: status}).then(function(r) {
           return r.data.tag;
         });
+      },
+
+      getRoomInfo: function(roomId) {
+        return calculateBoardState(lastPresence).rooms[roomId];
       }
     };
   })

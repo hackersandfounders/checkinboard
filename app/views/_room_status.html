@@ -6,7 +6,7 @@
 
     <div class="body">
         <div class="row">
-            <div class="col-sm-6" ng-repeat="roomId in allRooms">
+            <div class="col-sm-6" ng-repeat="roomId in allRooms" ng-click="showRoom(roomId)">
                 <div class="room {{ state.rooms[roomId].state }}">
                     <span class="room-id">{{ roomId }}</span>
                     <span class="status">

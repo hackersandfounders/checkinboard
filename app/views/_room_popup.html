@@ -1,0 +1,15 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Who's in room {{ roomId }}?</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <div ng-show="roomInfo.people.length > 0">
+            <h2 ng-repeat="p in roomInfo.people">{{ p.person.name }}</h2>
+        </div>
+        <div ng-show="!roomInfo || roomInfo.people.length == 0">
+            <h2>...nobody</h2>
+        </div>
+    </div>
+</div>

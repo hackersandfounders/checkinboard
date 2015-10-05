@@ -12,13 +12,11 @@ angular.module('board', [
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-
       .state('board', {
         url: "/board",
         controller: 'BoardController',
         templateUrl: "/views/board.html"
       })
-    
     ;
     
     // if none of the above states are matched, use this as the fallback
@@ -53,17 +51,28 @@ angular.module('board', [
     $scope.$on('destroy', function() { $scope.running = false; });
     
 
-    var tagModal, tagModalTimer;
+    var currentModal, currentModalTimer;
     function closeModal() {
-      if (tagModal) {
-        tagModal.close();
-        tagModal = null;
+      if (currentModal) {
+        currentModal.close();
+        currentModal = null;
       }
-      if (tagModalTimer) {
-        $timeout.cancel(tagModalTimer);
+      if (currentModalTimer) {
+        $timeout.cancel(currentModalTimer);
       }
-      tagModalTimer = null;
+      currentModalTimer = null;
     }
+
+    $scope.showRoom = function(roomId) {
+      currentModal = $modal.open({
+        templateUrl: '/views/_room_popup.html',
+        controller: function($scope) {
+          $scope.roomId = roomId;
+          $scope.roomInfo = Data.getRoomInfo(roomId);
+          console.log($scope.roomInfo);
+        }
+      });
+    };
 
     var checkin = new Audio(); checkin.src = "sounds/sign_in.mp3"; checkin.load();
     var checkout = new Audio(); checkout.src = "sounds/sign_out.mp3"; checkout.load();
@@ -75,7 +84,7 @@ angular.module('board', [
         tag = parseInt(tag.substr(4), 16) >>> 8;
       }
       closeModal();
-      tagModal = $modal.open({
+      currentModal = $modal.open({
         templateUrl: '/views/_tag_popup.html',
         windowClass: 'tag-popup',
         scope: $scope,
@@ -98,7 +107,7 @@ angular.module('board', [
                 BoardFeedback.playCheckoutSound();
               }
               
-              tagModalTimer = $timeout(closeModal, 3500);
+              currentModalTimer = $timeout(closeModal, 3500);
             }, function(){});
             
           });
