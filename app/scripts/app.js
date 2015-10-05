@@ -31,19 +31,27 @@ angular.module('board', [
     $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2'];
     $scope.allRooms.reverse();
     
-    $scope.running = true;
-    function reload() {
-      Data.getBoardState().then(function(state) {
+
+    function update() {
+      return Data.getBoardState().then(function(state) {
         $scope.state = state; //$scope.$broadcast('boardstate', state);
+        return state;
       });
-      if ($scope.running) {
-        $timeout(reload, 5000);
-      }
     }
-    $scope.$on('refresh', reload);
+    
+    function reload() {
+      update().then(function() {
+        if ($scope.running) {
+          $timeout(reload, 5000);
+        }
+      });
+    }
+    $scope.running = true;
+    reload();
+
+    $scope.$on('refresh', update);
     $scope.$on('destroy', function() { $scope.running = false; });
     
-    reload();
 
     var tagModal, tagModalTimer;
     function closeModal() {
