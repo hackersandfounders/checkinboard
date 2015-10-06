@@ -1,12 +1,14 @@
 
 <div>
-    <div class="modal-header">
+    <div class="modal-header" ng-show="!error">
         <span class="meta pull-right">Room: {{ tag.owner.room }} / Company: {{ tag.owner.company }}</span>
         <h3 class="modal-title">Hi, {{ tag.owner.name }}!</h3>
     </div>
+    <div class="modal-header" ng-show="error">
+        <h3 class="modal-title">Oops!</h3>
+    </div>
 
-    <div class="modal-body">
-
+    <div class="modal-body" ng-show="!error">
         <div ng-show="busy">
             <h1 class="holdon">Hold on...</h1>
         </div>
@@ -24,4 +26,15 @@
         </div>
         
     </div>
+
+    <div class="modal-body" ng-show="error">
+        <h1>Your tag is not registered.</h1>
+        <p>Please inform <b>Joris Machielse</b> about this.</p>
+
+    </div>
+
+    <div class="modal-footer" ng-show="error">
+        <button class="btn btn-default" ng-click="close()">Close</button>
+    </div>
+    
 </div>

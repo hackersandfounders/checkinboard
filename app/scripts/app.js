@@ -76,7 +76,7 @@ angular.module('board', [
 
     var checkin = new Audio(); checkin.src = "sounds/sign_in.mp3"; checkin.load();
     var checkout = new Audio(); checkout.src = "sounds/sign_out.mp3"; checkout.load();
-    
+
     window.tag = function(tag) {
       
       if (typeof tag == 'string' && tag.match(/^0F00/i)) {
@@ -99,7 +99,6 @@ angular.module('board', [
               $scope.tag = r;
               $scope.busy = false;
               $scope.$emit('refresh');
-
               
               if (r.status == 'present') {
                 BoardFeedback.playCheckinSound();
@@ -109,7 +108,11 @@ angular.module('board', [
               
               currentModalTimer = $timeout(closeModal, 3500);
             }, function(){});
-            
+          }, function(e) {
+            $scope.error = true;
+            $scope.close = function() {
+              closeModal();
+            };
           });
         }
       });

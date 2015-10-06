@@ -35,12 +35,12 @@ div.tile {
         font-size: $fontMedium;
         font-weight: 400;
         color: $mediumgray;
+        margin-bottom: $pad;
+        padding-bottom: $pad;
+        border-bottom: 2px solid $lightgray;
     }
     >.body {
         font-weight: bold;
-        margin-top: $pad;
-        padding-top: $pad;
-        border-top: 2px solid $lightgray;
     }
 }
 
@@ -51,6 +51,7 @@ div.tile.people-status {
         span { font-weight: bold; }
         .out { color: $red; }
         .in { color: $green; };
+        text-align: center;
     }
 }
 
@@ -122,6 +123,11 @@ div.tag-popup {
     .foot {
         text-align: center;
         color: $mediumgray;
+    }
+
+    p {
+        text-align: center;
+        font-size: $fontMedium;
     }
     
     h1 {
