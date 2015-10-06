@@ -10,30 +10,24 @@ angular.module('board.data', [])
     var lastPresence;
     function getPresenceList() {
       return $http.get(Config.baseUrl + 'presence').then(function(r) {
-        lastPresence = r.data.people;
+        lastPresence = r.data;
         return lastPresence;
       });
     }
 
-    function calculateBoardState(people) {
+    function calculateBoardState(presence) {
+
       // filter out unknown people
-      people = _.filter(people, function(p) {
+      people = _.filter(presence.people, function(p) {
         return p.room !== null && p.tags.length > 0; });
       
       // calculate per-person's presence state
       var states = _(people)
         .map(
           function(p) {
-            var unsureFlag = false;
-
             // get most recent tag
             var tag = _(p.tags).sortBy('updated_at').last();
             var ts = moment(tag.updated_at);
-            var delta = moment().diff(ts, 'seconds');
-
-            if (delta > 3600*12 && delta < 3600*24*7) {
-              unsureFlag = true;
-            }
             var checkinState = tag.status == 'present' ? 'in' : 'out';
 
             return {
@@ -41,7 +35,6 @@ angular.module('board.data', [])
               room: p.room,
               date: moment(tag.updated_at).unix(),
               state: checkinState,
-              unsure: unsureFlag,
               time: ts.format("HH:mm")
             };
           })
@@ -62,8 +55,15 @@ angular.module('board.data', [])
           };
         })
         .value();
+
+      var actionStates = {"check_in": "in", "check_out": "out"};
+      var recent = _(presence.actions).slice(0,12).map(function(p) {
+        p.state = actionStates[p.type];
+        p.time = moment(p.at).format("HH:mm");
+        p.name = p.owner.name || 'Unregistered';
+        return p;
+      }).value();
       
-      var recent = _(states).reject('unsure').slice(0,12).value();
       var unsure = _(states).filter('unsure').map('person').slice(0,8).value();
 
       return {
@@ -72,8 +72,7 @@ angular.module('board.data', [])
           'out': _.filter(states, {state: 'out'}).length
         },
         rooms: rooms,
-        recent: recent,
-        unsure: unsure
+        recent: recent
       };
     }
     
