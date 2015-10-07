@@ -6,8 +6,13 @@
     <div class="modal-body">
 
         <div ng-show="roomInfo.people.length > 0">
-            <h2 ng-repeat="p in roomInfo.people">{{ p.person.name }}</h2>
+            <div class="person-status" ng-repeat="p in roomInfo.people">
+            <i class="glyphicon glyphicon-user"></i>
+                {{ p.person.name }}
+                <span class="time">{{ p.person.company }}</span>
+            </div>
         </div>
+
         <div ng-show="!roomInfo || roomInfo.people.length == 0">
             <h2>...nobody</h2>
         </div>
