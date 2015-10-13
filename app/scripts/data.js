@@ -57,7 +57,7 @@ angular.module('board.data', [])
         .value();
 
       var actionStates = {"check_in": "in", "check_out": "out"};
-      var recent = _(presence.actions).slice(0,12).map(function(p) {
+      var recent = _(presence.actions).slice(0,20).map(function(p) {
         p.state = actionStates[p.type];
         p.time = moment(p.at).format("HH:mm");
         p.name = p.owner.name || 'Unregistered';

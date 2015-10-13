@@ -11,6 +11,19 @@ $fontNormal: 16px;
 $fontMedium: 24px;
 $fontLarge: 46px;
 
+@font-face{
+    font-family:"Neue Helvetica W01";
+    src:url("/fonts/helv_bold.woff2") format("woff2");
+    font-weight:700;font-style:normal;
+}
+
+@font-face{
+    font-family:"Neue Helvetica W01";
+    src:url("/fonts/helv.woff2") format("woff2");
+    font-weight:400;font-style:normal;
+}
+
+
 body {
     font-family: "Neue Helvetica W01", Helvetica, Arial, sans-serif;
     padding: $tilepad;
