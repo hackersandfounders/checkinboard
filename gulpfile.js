@@ -39,27 +39,16 @@ gulp.task('vendorjs', function () {
       'bower_components/lodash/lodash.min.js',
       'bower_components/angular/angular.min.js',
       'bower_components/angular-recursion/angular-recursion.min.js',
-
+      'bower_components/angular-animate/angular-animate.min.js',
+      
       'bower_components/checklist-model/checklist-model.js',
       
       'bower_components/angular-bootstrap/ui-bootstrap.min.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 
-      'bower_components/bootstrap-daterangepicker/daterangepicker.js',
-      
-      'bower_components/angular-google-maps/dist/angular-google-maps.min.js',
-
-      'bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js',
-      
       'bower_components/angular-ui/build/angular-ui.min.js',
       'bower_components/angular-ui-router/release/angular-ui-router.min.js',
 
-      'bower_components/Jcrop/js/jquery.Jcrop.min.js',
-      
-      'bower_components/d3/d3.js',
-      'bower_components/nvd3/nv.d3.js',
-      'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js',
-      
     ])
   //.pipe(uglify())
     .pipe(concat('vendor.js'))

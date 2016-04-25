@@ -1,5 +1,6 @@
 angular
   .module('board', [
+    'ngAnimate',
     'ui.bootstrap',
     'ui.router',
     'checklist-model', 
@@ -25,7 +26,7 @@ angular
 
   })
 
-  .controller('BoardController', function($scope, Data, $timeout, $modal) {
+  .controller('BoardController', function($scope, Data, $timeout, $uibModal) {
 
     $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2'];
     $scope.allRooms.reverse();
@@ -71,7 +72,7 @@ angular
       closeModal();
       $scope.checkoutPersons = persons;
       
-      currentModal = $modal.open({
+      currentModal = $uibModal.open({
         templateUrl: '/views/_checkout_popup.html',
         windowClass: 'checkout-popup',
         scope: $scope,
@@ -80,7 +81,7 @@ angular
         }
       });
 
-      currentModal.result.then(function(r) {
+      currentModal.closed.then(function(r) {
         $scope.checkoutPersons = false;
       });
       
@@ -90,7 +91,7 @@ angular
     $scope.showCheckoutDialog = showCheckoutDialog;
 
     $scope.showBulkCheckout = function() {
-      currentModal = $modal.open({
+      currentModal = $uibModal.open({
         templateUrl: '/views/_checkout_select_popup.html',
         scope: $scope,
         controller: function($scope) {
@@ -111,7 +112,7 @@ angular
     };
     
     $scope.showRoom = function(roomId) {
-      currentModal = $modal.open({
+      currentModal = $uibModal.open({
         templateUrl: '/views/_room_popup.html',
         scope: $scope,
         controller: function($scope) {
@@ -143,7 +144,7 @@ angular
       }
 
       closeModal();
-      currentModal = $modal.open({
+      currentModal = $uibModal.open({
         templateUrl: '/views/_tag_popup.html',
         windowClass: 'tag-popup',
         scope: $scope,
