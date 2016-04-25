@@ -27,7 +27,8 @@
     "Jcrop": "0.9.12",
     "angularjs-nvd3-directives": "~0.0.7",
     "angular-recursion": "~1.0.5",
-    "bootstrap-daterangepicker": "~1.3.22"
+    "bootstrap-daterangepicker": "~1.3.22",
+    "checklist-model": "^0.9.0"
   },
   "resolutions": {
     "bootstrap": "~3.3.4",

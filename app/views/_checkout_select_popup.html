@@ -1,0 +1,30 @@
+<div class="checkout-select-popup">
+    <div class="modal-header" ng-show="!error">
+        Mass checkout
+    </div>
+
+    <div class="modal-body">
+        <p>Please select which people you want to check out:</p>
+
+        <div ng-repeat="roomId in allRooms">
+            <div ng-show="state.rooms[roomId].people.length > 0">
+                <h4>{{ roomId }}</h4>
+                <div class="row">
+                    <div class="col col-sm-4" ng-repeat="p in state.rooms[roomId].people">
+                        <label ng-class="{selected: isSelected(p.person.id)}">
+                            <input type="checkbox" checklist-model="checkoutPersons" checklist-value="p"> {{ p.person.name }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default pull-lleft" ng-click="close()">Cancel</button>
+        <button class="btn btn-primary" ng-click="go()">Continue</button>
+    </div>
+    
+</div>

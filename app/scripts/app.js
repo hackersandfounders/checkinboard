@@ -1,7 +1,7 @@
 angular.module('board', [
   'ui.bootstrap',
   'ui.router',
-
+  'checklist-model', 
   // compiled templates
   'templates',
 
@@ -88,6 +88,27 @@ angular.module('board', [
 
     $scope.showCheckoutDialog = showCheckoutDialog;
 
+    $scope.showBulkCheckout = function() {
+      currentModal = $modal.open({
+        templateUrl: '/views/_checkout_select_popup.html',
+        scope: $scope,
+        controller: function($scope) {
+          $scope.checkoutPersons = [];
+          $scope.isSelected = function(id) {
+            return _.indexOf($scope.checkoutPersons.map(function (p) { return p.person.id; }), id) >= 0;
+          };
+          
+          $scope.go = function() {
+            closeModal();
+            showCheckoutDialog($scope.checkoutPersons);
+          };
+          $scope.close = function() {
+            $scope.$close();
+          };
+        }
+      });
+    };
+    
     $scope.showRoom = function(roomId) {
       currentModal = $modal.open({
         templateUrl: '/views/_room_popup.html',

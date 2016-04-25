@@ -39,6 +39,8 @@ gulp.task('vendorjs', function () {
       'bower_components/lodash/lodash.min.js',
       'bower_components/angular/angular.min.js',
       'bower_components/angular-recursion/angular-recursion.min.js',
+
+      'bower_components/checklist-model/checklist-model.js',
       
       'bower_components/angular-bootstrap/ui-bootstrap.min.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',

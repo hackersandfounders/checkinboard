@@ -70,6 +70,11 @@ div.tile.people-status {
 }
 
 div.tile.room-status {
+
+    .checkout-button {
+        padding: 4px;
+    }
+    
     >.body {
         padding-bottom: 0;
     }
@@ -202,4 +207,30 @@ div.room-popup {
         
     }
 
+}
+
+.checkout-select-popup {
+    .row {
+        padding-left: 10px;
+    }
+    
+    .col {
+        padding: 0;
+        padding-right: 10px;
+    }
+    
+    label {
+        font-size: $fontNormal;
+        font-weight: 700;
+        display: block;
+        background: #eee;
+        padding: 10px;
+        border-radius: 10px;
+
+        transition: background 200ms linear;
+
+        &.selected {
+            background: $green; color: white;
+        }
+    }
 }
