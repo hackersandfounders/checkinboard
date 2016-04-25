@@ -18,7 +18,7 @@ angular.module('board', [
         templateUrl: "/views/board.html"
       })
     ;
-    
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/board');
 
@@ -28,7 +28,7 @@ angular.module('board', [
 
     $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2'];
     $scope.allRooms.reverse();
-    
+
 
     function update() {
       return Data.getBoardState().then(function(state) {
@@ -36,7 +36,7 @@ angular.module('board', [
         return state;
       });
     }
-    
+
     function reload() {
       update().then(function() {
         if ($scope.running) {
@@ -49,10 +49,11 @@ angular.module('board', [
 
     $scope.$on('refresh', update);
     $scope.$on('destroy', function() { $scope.running = false; });
-    
+
 
     var currentModal, currentModalTimer;
     function closeModal() {
+      $scope.checkoutPersons = false;
       if (currentModal) {
         currentModal.close();
         currentModal = null;
@@ -63,13 +64,37 @@ angular.module('board', [
       currentModalTimer = null;
     }
 
+    $scope.checkoutPersons = false;
+
+    function showCheckoutDialog(persons) {
+      closeModal();
+      $scope.checkoutPersons = persons;
+      
+      currentModal = $modal.open({
+        templateUrl: '/views/_checkout_popup.html',
+        windowClass: 'checkout-popup',
+        scope: $scope,
+        controller: function($scope) {
+          $scope.close = closeModal;
+        }
+      });
+
+      currentModal.result.then(function(r) {
+        $scope.checkoutPersons = false;
+      });
+      
+    };
+
+
+    $scope.showCheckoutDialog = showCheckoutDialog;
+
     $scope.showRoom = function(roomId) {
       currentModal = $modal.open({
         templateUrl: '/views/_room_popup.html',
+        scope: $scope,
         controller: function($scope) {
           $scope.roomId = roomId;
           $scope.roomInfo = Data.getRoomInfo(roomId);
-          console.log($scope.roomInfo);
         }
       });
     };
@@ -78,11 +103,22 @@ angular.module('board', [
     var checkout = new Audio(); checkout.src = "sounds/sign_out.mp3"; checkout.load();
 
     window.tag = function(tag) {
-      
+
       if (typeof tag == 'string' && tag.match(/^0F00/i)) {
         // strip 0f00, convert to tag nr
         tag = parseInt(tag.substr(4), 16) >>> 8;
       }
+
+      if ($scope.checkoutPersons) {
+        console.log($scope.checkoutPersons);
+
+        Data.bulkCheckout(tag, _.pluck($scope.checkoutPersons, 'person.id')).then(
+          function(r) {
+            closeModal();
+          });
+        return;
+      }
+
       closeModal();
       currentModal = $modal.open({
         templateUrl: '/views/_tag_popup.html',
@@ -99,13 +135,13 @@ angular.module('board', [
               $scope.tag = r;
               $scope.busy = false;
               $scope.$emit('refresh');
-              
+
               if (r.status == 'present') {
                 BoardFeedback.playCheckinSound();
               } else {
                 BoardFeedback.playCheckoutSound();
               }
-              
+
               currentModalTimer = $timeout(closeModal, 3500);
             }, function(){});
           }, function(e) {
@@ -117,7 +153,7 @@ angular.module('board', [
         }
       });
     };
-    
+
   })
 
 ;

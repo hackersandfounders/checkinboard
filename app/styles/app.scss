@@ -97,7 +97,7 @@ div.tile.room-status {
     }
 }
 
-div.person-status {
+.person-status {
     font-size: $fontMedium;
     font-weight: bold;
 
@@ -154,4 +154,39 @@ div.tag-popup {
     .red { color: $red; }
     .holdon { color: $mediumgray; }
     
+}
+
+div.room-popup {
+
+    .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+
+    .thumbnail {
+        margin-bottom: 0;
+    }
+
+    .caption {
+        height: 78px;
+        overflow: none;
+    }
+    
+    div.person-status {
+        padding-left: 5px;
+        padding-right: 5px;
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .company {
+            font-weight: 400;
+            font-size: $fontNormal;
+            color: $mediumgray;
+        }
+        
+    }
+
 }

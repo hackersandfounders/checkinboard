@@ -2,7 +2,7 @@ angular.module('board.data', [])
 
   .constant('Config', {
     baseUrl: '//building.hackersandfounders.nl/api/v1/'
-    //baseUrl: 'http://building.10.0.7.158.xip.io/api/v1/'
+    //baseUrl: 'http://building.10.0.7.40.xip.io/api/v1/'
   })
 
   .factory('Data', function($http, Config) {
@@ -96,7 +96,12 @@ angular.module('board.data', [])
 
       getRoomInfo: function(roomId) {
         return calculateBoardState(lastPresence).rooms[roomId];
+      },
+
+      bulkCheckout: function(tag, personIds) {
+        return $http.post(Config.baseUrl + 'bulk_check_outs', {bulk_check_out: {authorized_by: tag, people_ids: personIds}});
       }
+      
     };
   })
 
