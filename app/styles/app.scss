@@ -29,6 +29,7 @@ body {
     padding: $tilepad;
     background: $mainbg;
     font-weight: 400;
+    font-size: $fontMedium;
 }
 
 div.logo img {
@@ -78,15 +79,19 @@ div.tile.room-status {
         background: $lightgray;
         margin-bottom: $pad;
         span.room-id {
-            margin: 2px;
+            position: absolute;
+            font-size: $fontNormal;
+            left: 4px; top: 2px;
+            font-weight: normal;
         }
         span.status {
             margin-top: 5px;
             position: absolute;
+            bottom: 20px;
             width: 100%;
             display: block;
             text-align: center;
-            font-weight: bold;
+            font-weight: 700;
             font-size: $fontMedium;
             //top: 50%;
             //transform: translateY(-50%);
@@ -99,7 +104,7 @@ div.tile.room-status {
 
 .person-status {
     font-size: $fontMedium;
-    font-weight: bold;
+    font-weight: 700;
 
     &.out {
         color: #999;
@@ -117,10 +122,15 @@ div.tile.room-status {
     margin-bottom: $pad;
 }
 
+.modal-header {
+    .modal-title {
+        font-weight: 700;
+        font-size: $fontMedium;
+    }
+}
+
 div.tag-popup {
     .modal-header {
-        font-weight: bold;
-        font-size: $fontMedium;
         .meta {
             font-size: $fontNormal;
             color: $mediumgray;
@@ -165,6 +175,9 @@ div.room-popup {
 
     .thumbnail {
         margin-bottom: 0;
+        img {
+            width: 100%;
+        }
     }
 
     .caption {
