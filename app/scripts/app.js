@@ -1,13 +1,14 @@
-angular.module('board', [
-  'ui.bootstrap',
-  'ui.router',
-  'checklist-model', 
-  // compiled templates
-  'templates',
+angular
+  .module('board', [
+    'ui.bootstrap',
+    'ui.router',
+    'checklist-model', 
+    // compiled templates
+    'templates',
 
-  // modules
-  'board.data',
-])
+    // modules
+    'board.data',
+  ])
 
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -17,7 +18,7 @@ angular.module('board', [
         controller: 'BoardController',
         templateUrl: "/views/board.html"
       })
-    ;
+      ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/board');
@@ -136,6 +137,7 @@ angular.module('board', [
         Data.bulkCheckout(tag, _.pluck($scope.checkoutPersons, 'person.id')).then(
           function(r) {
             closeModal();
+            update();
           });
         return;
       }
@@ -177,4 +179,19 @@ angular.module('board', [
 
   })
 
-;
+  .directive('boardClock', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, elem) {
+
+        function update() {
+          elem.html(moment().format("HH:mm"));
+        }
+        update();
+        setInterval(update, 1000);
+      }
+      
+    };
+  })
+    
+  ;

@@ -60,12 +60,12 @@ div.tile {
 
 
 div.tile.people-status {
-    .row.inout {
+    .inout {
+        padding: 0 10px;
         font-size: 40px;
         span { font-weight: bold; }
         .out { color: $red; }
         .in { color: $green; };
-        text-align: center;
     }
 }
 
@@ -234,3 +234,4 @@ div.room-popup {
         }
     }
 }
+
