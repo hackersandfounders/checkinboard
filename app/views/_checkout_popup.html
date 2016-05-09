@@ -3,18 +3,22 @@
     <h3 class="modal-title">Manual checkout</h3>
   </div>
 
-  <div class="modal-body">
-    <p>You are about to manually check out the following people:</p>
+  <div class="modal-body" ng-show="!loading">
+      <p>You are about to manually check out the following people:</p>
 
-    <ul class="person-status" ng-repeat="p in checkoutPersons">
-      <li>{{ p.person.name }}</li>
-    </ul>
-
-    <p><strong>Swipe your tag to confirm.</strong></p>
-    
+      <ul class="person-status" ng-repeat="p in checkoutPersons">
+          <li>{{ p.person.name }}</li>
+      </ul>
+      <p><strong>Swipe your tag to confirm.</strong></p>
   </div>
 
-  <div class="modal-footer">
+  <div class="loading modal-body" ng-show="loading">
+    <p>Please wait...</p>
+
+    <img src="/img/gears.gif">
+  </div>
+
+  <div class="modal-footer" ng-show="!loading">
     <button class="btn btn-default" ng-click="close()">Cancel</button>
   </div>
   

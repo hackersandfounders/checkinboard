@@ -131,6 +131,7 @@ div.tile.room-status {
     .modal-title {
         font-weight: 700;
         font-size: $fontMedium;
+        text-align: center;
     }
 }
 
@@ -235,3 +236,8 @@ div.room-popup {
     }
 }
 
+.modal-body {
+  &.loading {
+    text-align: center;
+  }
+}

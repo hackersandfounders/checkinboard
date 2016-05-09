@@ -133,10 +133,10 @@ angular
       }
 
       if ($scope.checkoutPersons) {
-        console.log($scope.checkoutPersons);
-
+        $scope.loading = true;
         Data.bulkCheckout(tag, _.pluck($scope.checkoutPersons, 'person.id')).then(
           function(r) {
+            $scope.loading = false;
             closeModal();
             update();
           });

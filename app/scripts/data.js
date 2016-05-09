@@ -1,8 +1,8 @@
 angular.module('board.data', [])
 
   .constant('Config', {
-    baseUrl: '//building.hackersandfounders.nl/api/v1/'
-    //baseUrl: 'http://building.10.0.7.40.xip.io/api/v1/'
+    //baseUrl: '//building.hackersandfounders.nl/api/v1/'
+     baseUrl: 'http://building.10.0.7.40.xip.io/api/v1/'
   })
 
   .factory('Data', function($http, Config) {
