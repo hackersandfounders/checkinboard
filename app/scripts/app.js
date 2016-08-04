@@ -1,6 +1,5 @@
 angular
   .module('board', [
-    'ngAnimate',
     'ui.bootstrap',
     'ui.router',
     'checklist-model',
@@ -153,34 +152,32 @@ angular
         });
       }
 
-      showModal('_popup_holdon.html', 'tag-popup', function() {
-        Data.getTagInfo(tag).then(function(r) {
-          var tag = r;
-          var newState = r.status == 'present' ? 'absent' : 'present';
-          Data.updateTagStatus(tag.key, newState).then(function(tag) {
-            $scope.tag = tag;
-            $scope.$emit('refresh');
+      Data.getTagInfo(tag).then(function(r) {
+        var tag = r;
+        var newState = r.status == 'present' ? 'absent' : 'present';
+        Data.updateTagStatus(tag.key, newState).then(function(r) {
+          $scope.tag = r;
+          $scope.$emit('refresh');
 
-            try {
-              if (r.status == 'present') {
-                BoardFeedback.playCheckinSound();
-              } else {
-                BoardFeedback.playCheckoutSound();
-              }
-            } catch (e) {};
+          try {
+            if (r.status == 'present') {
+              BoardFeedback.playCheckinSound();
+            } else {
+              BoardFeedback.playCheckoutSound();
+            }
+          } catch (e) {};
 
-            showModal('_popup_tag_status.html', 'tag-popup', function() {
-              currentModalTimer = $timeout(closeModal, 3500);
-            });
-
-          }, function(){});
-        }, function(e) {
-          showModal('_popup_tag_error.html', 'tag-popup', function() {
-            currentModalTimer = $timeout(closeModal, 20 * 1000);
-            $scope.close = function() {
-              closeModal();
-            };
+          showModal('_popup_tag_status.html', 'tag-popup', function() {
+            currentModalTimer = $timeout(closeModal, 3500);
           });
+
+        }, function(){});
+      }, function(e) {
+        showModal('_popup_tag_error.html', 'tag-popup', function() {
+          currentModalTimer = $timeout(closeModal, 20 * 1000);
+          $scope.close = function() {
+            closeModal();
+          };
         });
       });
 

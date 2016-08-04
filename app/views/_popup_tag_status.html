@@ -5,11 +5,11 @@
     </div>
 
     <div class="modal-body">
-        <div ng-show="tag.status == 'present'">
+        <div ng-if="tag.status == 'present'">
             <h1 class="green">You are now checked in</h1>
         </div>
 
-        <div ng-show="tag.status == 'absent'">
+        <div ng-if="tag.status == 'absent'">
             <h1 class="red">You are now checked out.</h1>
         </div>
 
