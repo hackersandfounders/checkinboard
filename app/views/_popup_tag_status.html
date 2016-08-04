@@ -1,0 +1,18 @@
+<div ng-cloak>
+    <div class="modal-header">
+        <span class="meta pull-right">Room: {{ tag.owner.room }} / Company: {{ tag.owner.company }}</span>
+        <h3 class="modal-title">Hi, {{ tag.owner.name }}!</h3>
+    </div>
+
+    <div class="modal-body">
+        <div ng-show="tag.status == 'present'">
+            <h1 class="green">You are now checked in</h1>
+        </div>
+
+        <div ng-show="tag.status == 'absent'">
+            <h1 class="red">You are now checked out.</h1>
+        </div>
+
+        <p class="foot">Have a nice day!</p>
+    </div>
+</div>

@@ -42,9 +42,9 @@ div.tile {
     background: white;
     padding: $pad;
     margin-bottom: $tilepad;
-    
+
     box-shadow: 6px 6px 6px rgba(0,0,0,0.1);
-    
+
     >.header {
         font-size: $fontMedium;
         font-weight: 400;
@@ -74,7 +74,7 @@ div.tile.room-status {
     .checkout-button {
         padding: 4px;
     }
-    
+
     >.body {
         padding-bottom: 0;
     }
@@ -114,11 +114,11 @@ div.tile.room-status {
     &.out {
         color: #999;
     }
-    
+
     i {
         padding-right: $pad/2;
     }
-    
+
     .time {
         font-weight: 400;
         font-size: $fontNormal;
@@ -144,11 +144,11 @@ div.tag-popup {
             font-weight: 400;
         }
     }
-    
+
     .modal-dialog {
         margin-top: 200px;
     }
-    
+
     .foot {
         text-align: center;
         color: $mediumgray;
@@ -158,19 +158,19 @@ div.tag-popup {
         text-align: center;
         font-size: $fontMedium;
     }
-    
+
     h1 {
         font-weight: bold;
         text-align: center;
         margin-top: $pad*4;
         margin-bottom: $pad*4;
     }
-    
+
     .green { color: $green; }
     .red { color: $red; }
     .holdon { color: $mediumgray; }
-    
 }
+
 
 div.room-popup {
 
@@ -190,7 +190,7 @@ div.room-popup {
         height: 78px;
         overflow: none;
     }
-    
+
     div.person-status {
         padding-left: 5px;
         padding-right: 5px;
@@ -199,13 +199,13 @@ div.room-popup {
             margin: 0;
             font-size: 18px;
         }
-        
+
         .company {
             font-weight: 400;
             font-size: $fontNormal;
             color: $mediumgray;
         }
-        
+
     }
 
 }
@@ -214,12 +214,12 @@ div.room-popup {
     .row {
         padding-left: 10px;
     }
-    
+
     .col {
         padding: 0;
         padding-right: 10px;
     }
-    
+
     label {
         font-size: $fontNormal;
         font-weight: 700;

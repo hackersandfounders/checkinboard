@@ -143,42 +143,47 @@ angular
         return;
       }
 
-      closeModal();
-      currentModal = $uibModal.open({
-        templateUrl: '/views/_tag_popup.html',
-        windowClass: 'tag-popup',
-        scope: $scope,
-        controller: function($scope) {
-          $scope.busy = true;
-          $scope.tag = null;
+      function showModal(template, cls, controller) {
+        closeModal();
+        currentModal = $uibModal.open({
+          templateUrl: '/views/' + template,
+          windowClass: cls,
+          scope: $scope,
+          controller: controller
+        });
+      }
 
-          Data.getTagInfo(tag).then(function(r) {
-            $scope.tag = r;
+      showModal('_popup_holdon.html', 'tag-popup', function() {
+        Data.getTagInfo(tag).then(function(r) {
+          var tag = r;
+          var newState = r.status == 'present' ? 'absent' : 'present';
+          Data.updateTagStatus(tag.key, newState).then(function(tag) {
+            $scope.tag = tag;
+            $scope.$emit('refresh');
 
-            var newState = r.status == 'present' ? 'absent' : 'present';
-            Data.updateTagStatus(tag, newState).then(function(r) {
-              $scope.tag = r;
-              $scope.busy = false;
-              $scope.$emit('refresh');
+            try {
+              if (r.status == 'present') {
+                BoardFeedback.playCheckinSound();
+              } else {
+                BoardFeedback.playCheckoutSound();
+              }
+            } catch (e) {};
 
-              try {
-                if (r.status == 'present') {
-                  BoardFeedback.playCheckinSound();
-                } else {
-                  BoardFeedback.playCheckoutSound();
-                }
-              } catch (e) {};
-
+            showModal('_popup_tag_status.html', 'tag-popup', function() {
               currentModalTimer = $timeout(closeModal, 3500);
-            }, function(){});
-          }, function(e) {
-            $scope.error = true;
+            });
+
+          }, function(){});
+        }, function(e) {
+          showModal('_popup_tag_error.html', 'tag-popup', function() {
+            currentModalTimer = $timeout(closeModal, 20 * 1000);
             $scope.close = function() {
               closeModal();
             };
           });
-        }
+        });
       });
+
     };
 
   })
