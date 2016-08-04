@@ -3,7 +3,7 @@ angular
     'ngAnimate',
     'ui.bootstrap',
     'ui.router',
-    'checklist-model', 
+    'checklist-model',
     // compiled templates
     'templates',
 
@@ -71,7 +71,7 @@ angular
     function showCheckoutDialog(persons) {
       closeModal();
       $scope.checkoutPersons = persons;
-      
+
       currentModal = $uibModal.open({
         templateUrl: '/views/_checkout_popup.html',
         windowClass: 'checkout-popup',
@@ -84,7 +84,7 @@ angular
       currentModal.closed.then(function(r) {
         $scope.checkoutPersons = false;
       });
-      
+
     };
 
 
@@ -99,7 +99,7 @@ angular
           $scope.isSelected = function(id) {
             return _.indexOf($scope.checkoutPersons.map(function (p) { return p.person.id; }), id) >= 0;
           };
-          
+
           $scope.go = function() {
             closeModal();
             showCheckoutDialog($scope.checkoutPersons);
@@ -110,7 +110,7 @@ angular
         }
       });
     };
-    
+
     $scope.showRoom = function(roomId) {
       currentModal = $uibModal.open({
         templateUrl: '/views/_room_popup.html',
@@ -150,6 +150,7 @@ angular
         scope: $scope,
         controller: function($scope) {
           $scope.busy = true;
+          $scope.tag = null;
 
           Data.getTagInfo(tag).then(function(r) {
             $scope.tag = r;
@@ -160,11 +161,13 @@ angular
               $scope.busy = false;
               $scope.$emit('refresh');
 
-              if (r.status == 'present') {
-                BoardFeedback.playCheckinSound();
-              } else {
-                BoardFeedback.playCheckoutSound();
-              }
+              try {
+                if (r.status == 'present') {
+                  BoardFeedback.playCheckinSound();
+                } else {
+                  BoardFeedback.playCheckoutSound();
+                }
+              } catch (e) {};
 
               currentModalTimer = $timeout(closeModal, 3500);
             }, function(){});
@@ -191,8 +194,8 @@ angular
         update();
         setInterval(update, 1000);
       }
-      
+
     };
   })
-    
+
   ;

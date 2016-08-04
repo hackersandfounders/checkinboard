@@ -1,5 +1,5 @@
 <div>
-    <div class="modal-header" ng-show="!error">
+    <div class="modal-header" ng-show="!error && !busy">
         <span class="meta pull-right">Room: {{ tag.owner.room }} / Company: {{ tag.owner.company }}</span>
         <h3 class="modal-title">Hi, {{ tag.owner.name }}!</h3>
     </div>
@@ -11,29 +11,29 @@
         <div ng-show="busy">
             <h1 class="holdon">Hold on...</h1>
         </div>
-        
+
         <div ng-show="!busy">
-            <div ng-show="tag.status == 'present'">
+            <div ng-if="tag.status == 'present'">
                 <h1 class="green">You are now checked in</h1>
             </div>
-            
-            <div ng-show="tag.status == 'absent'">
+
+            <div ng-if="tag.status == 'absent'">
                 <h1 class="red">You are now checked out.</h1>
             </div>
-            
+
             <p class="foot">Have a nice day!</p>
         </div>
-        
+
     </div>
 
     <div class="modal-body" ng-show="error">
         <h1>Your tag is not registered!</h1>
         <p>Register yourself by going to <b>http://app.hackersandfounders.nl</b>.</p>
-        <p><img src="/img/qr.png" width="150" /></p>
+        <p><img src="img/qr.png" width="150" /></p>
     </div>
 
     <div class="modal-footer" ng-show="error">
         <button class="btn btn-default" ng-click="close()">Close</button>
     </div>
-    
+
 </div>
