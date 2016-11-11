@@ -78,6 +78,20 @@ div.tile.room-status {
     >.body {
         padding-bottom: 0;
     }
+
+    .body .row > div {
+        &.transparent {
+            opacity: 0;
+        }
+
+        &:nth-child(even) {
+            padding-left: 7.5px;
+        }
+        &:nth-child(odd) {
+            padding-right: 7.5px;
+        }
+    }
+
     div.room {
         height: 80px;
         position: relative;
@@ -86,7 +100,7 @@ div.tile.room-status {
         span.room-id {
             position: absolute;
             font-size: $fontNormal;
-            left: 4px; top: 2px;
+            left: 10px; top: 4px;
             font-weight: normal;
         }
         span.status {
@@ -237,7 +251,7 @@ div.room-popup {
 }
 
 .modal-body {
-  &.loading {
-    text-align: center;
-  }
+    &.loading {
+        text-align: center;
+    }
 }

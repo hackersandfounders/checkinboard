@@ -2,7 +2,6 @@ angular
   .module('board', [
     'ui.bootstrap',
     'ui.router',
-    'checklist-model',
     // compiled templates
     'templates',
 
@@ -27,7 +26,7 @@ angular
 
   .controller('BoardController', function($scope, Data, $timeout, $uibModal) {
 
-    $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2'];
+    $scope.allRooms = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2', '5.1', 'skip'];
     $scope.allRooms.reverse();
 
 
@@ -111,6 +110,7 @@ angular
     };
 
     $scope.showRoom = function(roomId) {
+      if (roomId == 'skip') return;
       currentModal = $uibModal.open({
         templateUrl: '/views/_room_popup.html',
         scope: $scope,
