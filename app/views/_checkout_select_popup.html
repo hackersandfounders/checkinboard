@@ -12,19 +12,19 @@
                 <div class="row">
                     <div class="col col-sm-4" ng-repeat="p in state.rooms[roomId].people">
                         <label ng-class="{selected: isSelected(p.person.id)}">
-                            <input type="checkbox" checklist-model="checkoutPersons" checklist-value="p"> {{ p.person.name }}
+                            <input type="checkbox" ng-model="a" ng-change="toggleBulkSelect(p)"> {{ p.person.name }}
                         </label>
                     </div>
                 </div>
             </div>
 
         </div>
-        
+
     </div>
 
     <div class="modal-footer">
         <button class="btn btn-default pull-lleft" ng-click="close()">Cancel</button>
         <button class="btn btn-primary" ng-click="go()">Continue</button>
     </div>
-    
+
 </div>

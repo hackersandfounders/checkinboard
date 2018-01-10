@@ -1,8 +1,7 @@
 angular.module('board.data', [])
 
   .constant('Config', {
-    baseUrl: '//building.hackersandfounders.nl/api/v1/'
-    // baseUrl: 'http://building.10.0.7.40.xip.io/api/v1/'
+    baseUrl: '//board-api.hackersandfounders.nl/api/v1/'
   })
 
   .factory('Data', function($http, Config) {
@@ -20,7 +19,7 @@ angular.module('board.data', [])
       // filter out unknown people
       people = _.filter(presence.people, function(p) {
         return p.room !== null && p.tags.length > 0; });
-      
+
       // calculate per-person's presence state
       var states = _(people)
         .map(
@@ -63,7 +62,7 @@ angular.module('board.data', [])
         p.name = p.owner.name || 'Unregistered';
         return p;
       }).value();
-      
+
       var unsure = _(states).filter('unsure').map('person').slice(0,8).value();
 
       return {
@@ -75,7 +74,7 @@ angular.module('board.data', [])
         recent: recent
       };
     }
-    
+
     return {
       getPresenceList: getPresenceList,
       getBoardState: function() {
@@ -101,7 +100,7 @@ angular.module('board.data', [])
       bulkCheckout: function(tag, personIds) {
         return $http.post(Config.baseUrl + 'bulk_check_outs', {bulk_check_out: {authorized_by: tag, people_ids: personIds}});
       }
-      
+
     };
   })
 

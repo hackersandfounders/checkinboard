@@ -17,7 +17,7 @@ angular
         controller: 'BoardController',
         templateUrl: "/views/board.html"
       })
-      ;
+    ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/board');
@@ -97,6 +97,14 @@ angular
           $scope.isSelected = function(id) {
             return _.indexOf($scope.checkoutPersons.map(function (p) { return p.person.id; }), id) >= 0;
           };
+
+          $scope.toggleBulkSelect = function(p) {
+            if (!$scope.isSelected(p.person.id)) {
+              $scope.checkoutPersons.push(p)
+            } else {
+              $scope.checkoutPersons = $scope.checkoutPersons.filter(function(p1) { return p1.person.id !== p.person.id })
+            }
+          }
 
           $scope.go = function() {
             closeModal();
@@ -201,4 +209,4 @@ angular
     };
   })
 
-  ;
+;
